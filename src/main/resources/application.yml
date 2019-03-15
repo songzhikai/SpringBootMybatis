@@ -1,0 +1,45 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /
+
+spring:
+  aop:
+    proxy-target-class: true
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&autoReconnect=true&rewriteBatchedStatements=TRUE&useSSL=true
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource #禁用HTML页面的 Rest all 功能
+    druid:
+     initial-size: 10
+     min-idle: 10
+     max-active: 50
+     min-evictable-idle-time-millis: 100000
+     max-evictable-idle-time-millis: 100000
+     validation-query: select 1
+     test-while-idle: true
+     test-on-borrow: true
+     remove-abandoned: true
+     remove-abandoned-timeout-millis: 120000
+     time-between-eviction-runs-millis: 10000
+  servlet:
+    multipart:
+      max-file-size: 3MB
+      max-request-size: 3MB
+  application:
+    name: springboot-mybatis
+
+# mapperLocations指的路径是src/main/resources
+mybatis:
+  typeAliasesPackage: com.mybatis.model
+  mapperLocations: classpath:mapper/*.xml
+
+#pagehelper
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+    returnPageInfo: check
